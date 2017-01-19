@@ -14,7 +14,7 @@ def main():
     Main
     """
     if len(sys.argv) != 4:
-        print "expect {} [opengapps sources] [folder] [platform level]".format(sys.argv[0])
+        print("expect {} [opengapps sources] [folder] [platform level]".format(sys.argv[0]))
         sys.exit(-1)
 
     opengapps_sources = sys.argv[1]
@@ -25,7 +25,7 @@ def main():
     max_api_level = int(sys.argv[3])
 
     found_files = subprocess.check_output("find {} -type f".format(opengapps_sources), shell=True)
-    found_files = found_files.split('\n')
+    found_files = found_files.decode().split('\n')
 
     files = {}
     pattern = re.compile(r'(\d{2})/.*')
@@ -51,9 +51,9 @@ def main():
     for key in files:
         version = files[key]
         if version:
-            print "{0}{1}/{2}/{3}:system/{1}/{3}".format(opengapps_sources, folder, version, key)
+            print("{0}{1}/{2}/{3}:system/{1}/{3}".format(opengapps_sources, folder, version, key))
         else:
-            print "{0}{1}/{2}:system/{1}/{2}".format(opengapps_sources, folder, key)
+            print("{0}{1}/{2}:system/{1}/{2}".format(opengapps_sources, folder, key))
 
 if __name__ == "__main__":
     main()
